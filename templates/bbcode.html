@@ -1,0 +1,9 @@
+{%  from 'macros.html' import center_content, url %}
+<pre>
+{{ center_content(reviewheading) }}
+[center]
+{% for review in reviews -%}
+{{ url(review.url,review.tagline ) }} by {{ review.who }} on {{ review.when }}{{ reviewsep }}
+{%- endfor %}
+[center]
+</pre>
