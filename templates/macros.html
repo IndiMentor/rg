@@ -1,2 +1,5 @@
-{% macro center_content(content) %}[center]{{content}}[/center]{% endmacro %}
+{% macro center_content(content) %}[center]{{-content-}}[/center]{% endmacro %}
 {% macro url(url,text) %}[url={{url}}]{{text}}[/url]{% endmacro %}
+{%- macro size(content,sz) -%}[size={{ sz }}]{{-content-}}[/size]{% endmacro %}
+{%- macro color(content,col) -%}[color={{ col }}]{{- content -}}[/color]{%- endmacro -%}
+{%- macro under(rh,hc) -%}{%  for count in range(rh|length) -%}{{ hc }}{% endfor %}{%  endmacro %}
