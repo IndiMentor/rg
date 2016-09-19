@@ -1,0 +1,14 @@
+{%  extends 'bbcode.html' %}
+{% block thebbcode %}
+    <p>
+        {{ color(size(center_content(under(reviewheading,headchar)),4),'Red') }}
+        {{ color(size(center_content(reviewheading),4),'Red') -}}
+        {{ color(size(center_content(under(reviewheading,headchar)),4),'Red') }}
+        [center]
+        {% for review in reviews %}
+               {{- reviewsep -}} [color=red]{{ url(review.url,review.tagline ) }}[/color] by [b]{{ review
+               .who }}[/b]   {{- reviewsep -}}
+        {% endfor %}
+        [/center]
+    </p>
+{% endblock thebbcode %}

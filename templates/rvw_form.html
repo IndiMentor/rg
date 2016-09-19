@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}Review Generator{% endblock %}
+
+{% block contained_content %}
+    <div class="col-md-6">
+        {{ wtf.quick_form(form) }}
+    </div>
+{% endblock %}

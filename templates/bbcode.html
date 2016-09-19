@@ -1,11 +1,16 @@
-{%  from 'macros.html' import center_content, url,size,color,under %}
-<pre>
-{{ color(size(center_content(under(reviewheading,headchar)),4),'Red') }}
-{{ color(size(center_content(reviewheading),4),'Red') -}}
-{{ color(size(center_content(under(reviewheading,headchar)),4),'Red') }}
-[center]
-{% for review in reviews -%}
-[color=red]{{ url(review.url,review.tagline ) }}[/color] by [b]{{ review.who }}[/b]{{ reviewsep }}
-{%- endfor %}
-[/center]
-</pre>
+{% extends "layout.html" %}
+{% from 'macros.html' import center_content, url,size,color,under %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block contained_content %}
+    <div class="col-md-3">
+        <h1>Left Column</h1>
+        {{ wtf.quick_form(form) }}
+    </div>
+    <div class="col-md-7">
+        <h1>Right Column</h1>
+        {% block thebbcode %}
+        {% endblock thebbcode %}
+    </div>
+
+{% endblock contained_content %}

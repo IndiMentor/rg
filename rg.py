@@ -1,17 +1,21 @@
 from flask import Flask,render_template
 from generator import Review
+from forms import ReviewForm
+from flask_bootstrap import Bootstrap
+
 
 app = Flask(__name__)
+app.secret_key = 'iou98weuyern84hbfrehdsyyds9y8Y98Y98HLFR8YHoiuhjyhoui'
+Bootstrap(app)
+
 TEST_REVIEW=Review('BigMan','This is the tagline','https://indimentor.tk','DEC-2016')
 TEST_REVIEW2=Review('LittleMan','This be the tagline','https://indimentor.tk','APR-2016')
 allreviews = [
-Review('rman9119',
-       'Wow',
-       'http://independentgirls.com/indiboard/index.php/topic/479532-xxxheather-milf-is-good-for-the-body',
-       '42461',
-       'xxxHeather'),
-Review('flsailor', 'Amazing Milf', 'http://independentgirls.com/indiboard/index.php/topic/477279-xxxheather',
-       '42430', 'xxxHeather'),
+    Review('rman9119','Wow',
+           'http://independentgirls.com/indiboard/index.php/topic/479532-xxxheather-milf-is-good-for-the-body',
+           '42461','xxxHeather'),
+    Review('flsailor', 'Amazing Milf', 'http://independentgirls.com/indiboard/index.php/topic/477279-xxxheather',
+           '42430', 'xxxHeather'),
     Review('avgjoe', 'A Real Dream',
            'http://independentgirls.com/indiboard/index.php/topic/473840-xxxheather', '42430', 'xxxHeather'),
     Review('JDBones', 'Totally Blown Away ',
@@ -49,19 +53,41 @@ Review('flsailor', 'Amazing Milf', 'http://independentgirls.com/indiboard/index.
            'http://independentgirls.com/indiboard/index.php/topic/411105-xxxheather', '41944', 'xxxHeather'),
     Review('Altacocker', 'Back And Better Than Ever',
            'http://independentgirls.com/indiboard/index.php/topic/401525-xxxheather', '41883', 'xxxHeather'),
-
-
     ]
 
-@app.route('/')
+@app.route('/',methods=('GET','POST'))
 def hello_world():
-    return render_template('bbcode.html',
-                           reviews=allreviews,
-                           reviewheading="Recent Reviews",
-                           reviewsep=" *** ",
-                           headchar='-')
+    rform = ReviewForm();
+    if rform.validate_on_submit():
+        return render_template(rform.formtheme.data,
+                               reviews=[Review(rform.fromwho.data,
+                                               rform.formtagline.data,
+                                               rform.formurl.data,
+                                               rform.formwhen.data,
+                                               rform.formreviewof.data)],
+                               reviewheading="Recent Reviews",
+                               reviewsep=" *** ",
+                               headchar='-',
+                               form=rform)
+
+    return render_template('wrapper.html',
+                               reviews=allreviews,
+                               reviewheading="Recent Reviews",
+                               reviewsep=" *** ",
+                               headchar='-',
+                               form=rform)
+
     # return 'The test review is {} by {}'.format(TEST_REVIEW.tagline,TEST_REVIEW.who)
 
+@app.route("/rg",methods=('GET','POST'))
+def review_generator():
+    rform = ReviewForm();
+    if rform.validate_on_submit():
+        return render_template('bbcode.html',reviews=allreviews,
+                               reviewheading="Recent Reviews",
+                               reviewsep=" %% ",
+                               headchar='=')
+    return render_template('rvw_form.html',form=rform)
 
 if __name__ == '__main__':
     app.run()
