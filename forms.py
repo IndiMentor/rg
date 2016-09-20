@@ -1,7 +1,7 @@
 """Module for all WTF form definitions"""
 from flask_wtf import Form
 from wtforms.fields import TextField,DateField,StringField,SubmitField, SelectField
-from wtforms.validators import DataRequired, Regexp, ValidationError
+from wtforms.validators import DataRequired, Regexp, ValidationError, URL
 import requests
 
 # http://wtforms.readthedocs.io/en/latest/fields.html#basic-fields
@@ -16,7 +16,7 @@ def url_exists(form,field):
 
 
 class ReviewForm(Form):
-    fromwho = StringField(
+    formwho = StringField(
         "Author",
         default="Lee",
         validators=[DataRequired("You must enter an author"),
@@ -41,4 +41,18 @@ class ReviewForm(Form):
     formtheme = SelectField("Theme",
                             choices=[('wrapper.html','Wrapper'),('straight.html','Straight')],
                             validators=[DataRequired("Pleas enter a theme")])
+    rewiewsep = StringField("Review Separator",default=" * ")
+    rewiewheading = StringField("Heading",default="Recent Reviews")
+    headchar = StringField("Underline Chracter for Heading",default="-")
+    formsubmit = SubmitField("Generate")
+
+
+class URLForm(Form):
+    ReviewURL = StringField(
+        "Review URL",
+        default="http://independentgirls.com/indiboard/index.php/topic/502060-1pretty-lady/",
+        validators=[
+            DataRequired("You must enter the review URL"),
+            URL("Invalid URL Format"),
+            url_exists])
     formsubmit = SubmitField("Generate")

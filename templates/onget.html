@@ -1,0 +1,9 @@
+{% extends 'bbcode.html' %}
+{%  block thebbcode %}
+    <p>Use the form to enter details of your reviews.</p>
+    <p>Cut & paste the URL i.e. http://s.com/thereview into the url field.</p>
+    ----
+    {% for review in reviews %}
+        {{ review.url,review.who,review.tagline,review.when }}
+    {% endfor %}
+{% endblock thebbcode %}

@@ -1,8 +1,9 @@
-from flask import Flask,render_template
-from generator import Review
-from forms import ReviewForm
+from flask import Flask,render_template,session
+from models import Review
+from forms import ReviewForm, URLForm
 from flask_bootstrap import Bootstrap
 
+import pickle
 
 app = Flask(__name__)
 app.secret_key = 'iou98weuyern84hbfrehdsyyds9y8Y98Y98HLFR8YHoiuhjyhoui'
@@ -55,27 +56,52 @@ allreviews = [
            'http://independentgirls.com/indiboard/index.php/topic/401525-xxxheather', '41883', 'xxxHeather'),
     ]
 
-@app.route('/',methods=('GET','POST'))
-def hello_world():
-    rform = ReviewForm();
+@app.route("/",methods=('POST','GET'))
+def withurl():
+
+    if not 'reviews' in session:
+        exist_reviews = []
+        json_data = pickle.dumps(exist_reviews)
+        session['reviews']= json_data
+    else:
+        json_data = session['reviews']
+        exist_reviews=pickle.loads(json_data)
+    uform = URLForm()
+    if uform.validate_on_submit():
+        new_rvw=Review.from_page(uform.ReviewURL.data)
+        exist_reviews.append(new_rvw)
+        session['reviews']=pickle.dumps(exist_reviews)
+        return render_template('onget.html',form=uform,reviews=exist_reviews)
+
+    return render_template('onget.html',form=uform)
+
+
+@app.route('/bubba',methods=('GET','POST'))
+def bubba():
+    rform = ReviewForm()
+
     if rform.validate_on_submit():
         return render_template(rform.formtheme.data,
-                               reviews=[Review(rform.fromwho.data,
+                               reviews=[Review(rform.formwho.data,
                                                rform.formtagline.data,
                                                rform.formurl.data,
                                                rform.formwhen.data,
                                                rform.formreviewof.data)],
-                               reviewheading="Recent Reviews",
-                               reviewsep=" *** ",
-                               headchar='-',
+                               reviewheading=rform.rewiewheading.data,
+                               reviewsep=rform.rewiewsep.data,
+                               headchar=rform.headchar.data,
                                form=rform)
 
     return render_template('wrapper.html',
-                               reviews=allreviews,
-                               reviewheading="Recent Reviews",
-                               reviewsep=" *** ",
-                               headchar='-',
-                               form=rform)
+                           reviews=[Review(rform.formwho.data,
+                                           rform.formtagline.data,
+                                           rform.formurl.data,
+                                           rform.formwhen.data,
+                                           rform.formreviewof.data)],
+                           reviewheading=rform.rewiewheading.data,
+                           reviewsep=rform.rewiewsep.data,
+                           headchar=rform.headchar.data,
+                           form=rform)
 
     # return 'The test review is {} by {}'.format(TEST_REVIEW.tagline,TEST_REVIEW.who)
 

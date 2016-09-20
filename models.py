@@ -1,15 +1,38 @@
 """Generator contains helper functions and classes for generating review bb code"""
+from bs4 import BeautifulSoup
+import requests
 
 __author__ = 'eljefeloco'
 
 class Review:
     """A Review object encapsulates inportant fields"""
-    def __init__(self,who,tagline,url,when,reviewof="self"):
+    def __init__(self,who=None,tagline=None,url=None,when=None,reviewof=None):
         self.who = who
         self.tagline = tagline
         self.url = url
         self.when = when
         self.reviewof = reviewof
+
+
+    @classmethod
+    def from_data(cls,who,tagline,url,when,reviewof=None):
+        return cls(who,tagline,url,when,reviewof)
+
+    @classmethod
+    def from_page(cls,page_url):
+
+        the_page = requests.get(page_url)
+        bs=BeautifulSoup(the_page.content)
+
+        # scrape the data
+        who = bs.find(itemprop="creator name").get_text(strip=True)
+        tagline = bs.find("h1").get_text(strip=True,separator=u" ")
+        url = page_url
+        when = bs.find(itemprop="commentTime")['title']
+        reviewof = ""
+
+        return cls(who,tagline,url,when,reviewof)
+
 
 
 def main():
