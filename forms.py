@@ -55,4 +55,12 @@ class URLForm(Form):
             DataRequired("You must enter the review URL"),
             URL("Invalid URL Format"),
             url_exists])
-    formsubmit = SubmitField("Generate")
+    formtheme = SelectField("Theme",
+                            choices=[('wrapper.html','Wrapper'),('straight.html','Straight')],
+                            validators=[DataRequired("Pleas enter a theme")])
+    rewiewsep = StringField("Review Separator",default=" * ")
+    rewiewheading = StringField("Heading",default="Recent Reviews")
+    headchar = StringField("Underline Chracter for Heading",default="-")
+    formsubmit = SubmitField("Add Review")
+    formregen = SubmitField("Regnerate")
+    formreset = SubmitField("Reset")

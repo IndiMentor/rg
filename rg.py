@@ -1,4 +1,21 @@
-from flask import Flask,render_template,session
+"""Uses a form to generate an Indi Reviews Excerpt for incusion in your ad / signature / profile
+currently only accepts Reviews posted on independentgirls.com
+
+Developer Notes:
+
+To add a new template:
+    1. Write a new jinja template that extends bbcode.html
+    2. Write a block called thethebbcode which includes the required bbcode
+    3. You will have access to:
+        reviews - A list of all the reviews
+        headchar
+        reviewheading
+        reviewsep
+    4. Add your theme name and theme filename to the formtheme select field of UrlForm
+       in forms.py
+    5. That's all.
+"""
+from flask import Flask,render_template,session, request
 from models import Review
 from forms import ReviewForm, URLForm
 from flask_bootstrap import Bootstrap
@@ -59,61 +76,46 @@ allreviews = [
 @app.route("/",methods=('POST','GET'))
 def withurl():
 
+
+
     if not 'reviews' in session:
         exist_reviews = []
         json_data = pickle.dumps(exist_reviews)
         session['reviews']= json_data
     else:
         json_data = session['reviews']
-        exist_reviews=pickle.loads(json_data)
-    uform = URLForm()
-    if uform.validate_on_submit():
-        new_rvw=Review.from_page(uform.ReviewURL.data)
-        exist_reviews.append(new_rvw)
-        session['reviews']=pickle.dumps(exist_reviews)
-        return render_template('onget.html',form=uform,reviews=exist_reviews)
+        exist_reviews = pickle.loads(json_data)
 
+    uform = URLForm()
+    # Check which request method was used
+    if request.method == "POST":
+        # Now check which buuton was pressed
+        if uform.formreset.data:
+            # reset pressed.  Wipeout data and cookie
+            exist_reviews = []
+            json_data = pickle.dumps(exist_reviews)
+            session['reviews']= json_data
+        elif uform.formregen.data:
+            # Regen was chosen.  Just render w/o creating new review
+            return render_template(uform.formtheme.data,
+                                   form=uform,
+                                   reviews=exist_reviews,
+                                   reviewheading=uform.rewiewheading.data,
+                                   reviewsep=uform.rewiewsep.data,
+                                   headchar=uform.headchar.data)
+        else:
+            # addreview was chosen. Validate, create new review & store it
+            if uform.validate_on_submit():
+                new_rvw=Review.from_page(uform.ReviewURL.data)
+                exist_reviews.append(new_rvw)
+                session['reviews']=pickle.dumps(exist_reviews)
+                return render_template(uform.formtheme.data,form=uform,reviews=exist_reviews,
+                                       reviewheading=uform.rewiewheading.data,
+                                       reviewsep=uform.rewiewsep.data,
+                                       headchar=uform.headchar.data)
+    # must have been a GET, show the base form view
     return render_template('onget.html',form=uform)
 
-
-@app.route('/bubba',methods=('GET','POST'))
-def bubba():
-    rform = ReviewForm()
-
-    if rform.validate_on_submit():
-        return render_template(rform.formtheme.data,
-                               reviews=[Review(rform.formwho.data,
-                                               rform.formtagline.data,
-                                               rform.formurl.data,
-                                               rform.formwhen.data,
-                                               rform.formreviewof.data)],
-                               reviewheading=rform.rewiewheading.data,
-                               reviewsep=rform.rewiewsep.data,
-                               headchar=rform.headchar.data,
-                               form=rform)
-
-    return render_template('wrapper.html',
-                           reviews=[Review(rform.formwho.data,
-                                           rform.formtagline.data,
-                                           rform.formurl.data,
-                                           rform.formwhen.data,
-                                           rform.formreviewof.data)],
-                           reviewheading=rform.rewiewheading.data,
-                           reviewsep=rform.rewiewsep.data,
-                           headchar=rform.headchar.data,
-                           form=rform)
-
-    # return 'The test review is {} by {}'.format(TEST_REVIEW.tagline,TEST_REVIEW.who)
-
-@app.route("/rg",methods=('GET','POST'))
-def review_generator():
-    rform = ReviewForm();
-    if rform.validate_on_submit():
-        return render_template('bbcode.html',reviews=allreviews,
-                               reviewheading="Recent Reviews",
-                               reviewsep=" %% ",
-                               headchar='=')
-    return render_template('rvw_form.html',form=rform)
 
 if __name__ == '__main__':
     app.run()
