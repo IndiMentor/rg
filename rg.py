@@ -19,15 +19,19 @@ from flask import Flask,render_template,session, request
 from models import Review
 from forms import ReviewForm, URLForm
 from flask_bootstrap import Bootstrap
-
+from flask_nav import Nav
+from flask_nav.elements import Navbar, View
+from flask_nav import register_renderer
+from inverse_render import InverseRenderer  # or wherever you put all of it
 import pickle
 
+nav = Nav()
 app = Flask(__name__)
 app.secret_key = 'iou98weuyern84hbfrehdsyyds9y8Y98Y98HLFR8YHoiuhjyhoui'
 Bootstrap(app)
 
-TEST_REVIEW=Review('BigMan','This is the tagline','https://indimentor.tk','DEC-2016')
-TEST_REVIEW2=Review('LittleMan','This be the tagline','https://indimentor.tk','APR-2016')
+TEST_REVIEW = Review('BigMan','This is the tagline','https://indimentor.tk','DEC-2016')
+TEST_REVIEW2 = Review('LittleMan','This be the tagline','https://indimentor.tk','APR-2016')
 allreviews = [
     Review('rman9119','Wow',
            'http://independentgirls.com/indiboard/index.php/topic/479532-xxxheather-milf-is-good-for-the-body',
@@ -73,15 +77,14 @@ allreviews = [
            'http://independentgirls.com/indiboard/index.php/topic/401525-xxxheather', '41883', 'xxxHeather'),
     ]
 
-@app.route("/",methods=('POST','GET'))
+
+@app.route("/review",methods=('POST','GET'))
 def withurl():
 
-
-
-    if not 'reviews' in session:
+    if 'reviews' not in session:
         exist_reviews = []
         json_data = pickle.dumps(exist_reviews)
-        session['reviews']= json_data
+        session['reviews'] = json_data
     else:
         json_data = session['reviews']
         exist_reviews = pickle.loads(json_data)
@@ -94,7 +97,7 @@ def withurl():
             # reset pressed.  Wipeout data and cookie
             exist_reviews = []
             json_data = pickle.dumps(exist_reviews)
-            session['reviews']= json_data
+            session['reviews'] = json_data
         elif uform.formregen.data:
             # Regen was chosen.  Just render w/o creating new review
             return render_template(uform.formtheme.data,
@@ -106,9 +109,9 @@ def withurl():
         else:
             # addreview was chosen. Validate, create new review & store it
             if uform.validate_on_submit():
-                new_rvw=Review.from_page(uform.ReviewURL.data)
+                new_rvw = Review.from_page(uform.ReviewURL.data)
                 exist_reviews.append(new_rvw)
-                session['reviews']=pickle.dumps(exist_reviews)
+                session['reviews'] = pickle.dumps(exist_reviews)
                 return render_template(uform.formtheme.data,form=uform,reviews=exist_reviews,
                                        reviewheading=uform.rewiewheading.data,
                                        reviewsep=uform.rewiewsep.data,
@@ -117,5 +120,26 @@ def withurl():
     return render_template('onget.html',form=uform)
 
 
+@app.route("/price")
+def price():
+    return render_template("price.html")
+
+
+@app.route("/")
+def index():
+    return render_template("home.html")
+
+
+@nav.navigation()
+def basicnavbar():
+    return Navbar(
+        'Indi Tools',
+        View('Home', 'index'),
+        View('Review Generator','withurl'),
+        View('Price Generator','price'),
+    )
+
+nav.init_app(app)
 if __name__ == '__main__':
+    register_renderer(app, 'custom', InverseRenderer)
     app.run()

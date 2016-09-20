@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% from 'macros.html' import center_content, url,size,color,under %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block contained_content %}
+    <div class="col-sm-5">
+        <h1>Home Page</h1>
+    </div>
+    <div class="col-sm-7">
+        <h1>Nothing to see!</h1>
+        {% block thebbcode %}
+        {% endblock thebbcode %}
+    </div>
+
+{% endblock contained_content %}

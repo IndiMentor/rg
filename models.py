@@ -4,6 +4,7 @@ import requests
 
 __author__ = 'eljefeloco'
 
+
 class Review:
     """A Review object encapsulates inportant fields"""
     def __init__(self,who=None,tagline=None,url=None,when=None,reviewof=None):
@@ -13,7 +14,6 @@ class Review:
         self.when = when
         self.reviewof = reviewof
 
-
     @classmethod
     def from_data(cls,who,tagline,url,when,reviewof=None):
         return cls(who,tagline,url,when,reviewof)
@@ -22,7 +22,7 @@ class Review:
     def from_page(cls,page_url):
 
         the_page = requests.get(page_url)
-        bs=BeautifulSoup(the_page.content)
+        bs = BeautifulSoup(the_page.content)
 
         # scrape the data
         who = bs.find(itemprop="creator name").get_text(strip=True)
@@ -32,7 +32,6 @@ class Review:
         reviewof = ""
 
         return cls(who,tagline,url,when,reviewof)
-
 
 
 def main():
