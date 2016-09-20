@@ -3,6 +3,7 @@
 ### Adding a new template to the review generator
 
 To add a new template:
+
 1. Write a new jinja template that extends bbcode.html
 2. Write a block called thethebbcode which includes the required bbcode
 3. You will have access to:
