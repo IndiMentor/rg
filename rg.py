@@ -1,12 +1,10 @@
 """Uses a form to generate an Indi Reviews Excerpt for incusion in your ad / signature / profile
 currently only accepts Reviews posted on independentgirls.com
 
-Developer Notes:
 
-To add a new template:
 
 """
-from flask import Flask,render_template,session, request
+from flask import Flask, render_template, session, request
 from models import Review
 from forms import ReviewForm, URLForm
 from flask_bootstrap import Bootstrap
@@ -21,14 +19,15 @@ app = Flask(__name__)
 app.secret_key = 'iou98weuyern84hbfrehdsyyds9y8Y98Y98HLFR8YHoiuhjyhoui'
 Bootstrap(app)
 
-TEST_REVIEW = Review('BigMan','This is the tagline','https://indimentor.tk','DEC-2016')
-TEST_REVIEW2 = Review('LittleMan','This be the tagline','https://indimentor.tk','APR-2016')
+TEST_REVIEW = Review('BigMan', 'This is the tagline', 'https://indimentor.tk', 'DEC-2016')
+TEST_REVIEW2 = Review('LittleMan', 'This be the tagline', 'https://indimentor.tk', 'APR-2016')
 allreviews = [
-    Review('rman9119','Wow',
-           'http://independentgirls.com/indiboard/index.php/topic/479532-xxxheather-milf-is-good-for-the-body',
-           '42461','xxxHeather'),
-    Review('flsailor', 'Amazing Milf', 'http://independentgirls.com/indiboard/index.php/topic/477279-xxxheather',
-           '42430', 'xxxHeather'),
+    Review('rman9119', 'Wow',
+           'http://independentgirls.com/indiboard/index.php/topic/'
+           '479532-xxxheather-milf-is-good-for-the-body',
+           '42461', 'xxxHeather'),
+    Review('flsailor', 'Amazing Milf', 'http://independentgirls.com/indiboard/index.php/topic/'
+           '477279-xxxheather', '42430', 'xxxHeather'),
     Review('avgjoe', 'A Real Dream',
            'http://independentgirls.com/indiboard/index.php/topic/473840-xxxheather', '42430', 'xxxHeather'),
     Review('JDBones', 'Totally Blown Away ',
@@ -69,7 +68,7 @@ allreviews = [
     ]
 
 
-@app.route("/review",methods=('POST','GET'))
+@app.route("/review", methods=('POST', 'GET'))
 def withurl():
 
     if 'reviews' not in session:
@@ -103,12 +102,12 @@ def withurl():
                 new_rvw = Review.from_page(uform.ReviewURL.data)
                 exist_reviews.append(new_rvw)
                 session['reviews'] = pickle.dumps(exist_reviews)
-                return render_template(uform.formtheme.data,form=uform,reviews=exist_reviews,
+                return render_template(uform.formtheme.data, form=uform, reviews=exist_reviews,
                                        reviewheading=uform.rewiewheading.data,
                                        reviewsep=uform.rewiewsep.data,
                                        headchar=uform.headchar.data)
     # must have been a GET, show the base form view
-    return render_template('onget.html',form=uform)
+    return render_template('onget.html', form=uform)
 
 
 @app.route("/price")
@@ -126,8 +125,8 @@ def basicnavbar():
     return Navbar(
         'Indi Tools',
         View('Home', 'index'),
-        View('Review Generator','withurl'),
-        View('Price Generator','price'),
+        View('Review Generator', 'withurl'),
+        View('Price Generator', 'price'),
     )
 
 nav.init_app(app)

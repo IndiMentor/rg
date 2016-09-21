@@ -1,5 +1,6 @@
 from flask_bootstrap.nav import BootstrapRenderer
 
+
 class InverseRenderer(BootstrapRenderer):
     def visit_Navbar(self, node):
         nav_tag = super(InverseRenderer, self).visit_Navbar(node)

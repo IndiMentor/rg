@@ -15,5 +15,32 @@ To add a new template:
    in forms.py
 5. That's all.
 
+TODO:
+
+Make video showing usage max 1 min.
+Description of how to use incorporated into web page
+Research how to deploy on nginx
+Uninstall bbcode
+Fix-up validation so if can't get review info fail url
+Add Highlight color field
+Add Font field both based on values permitted by indi
+indimentor intropost
+easyengine setup inditools.tk
+Strip out ?blahblah from urls
+check if / how urls can be normalized
+
+### Later versions
+
+
+Render bbcode ina seperate template that is written to a string
+insert this string into web page and have converted to html by
+bbcode so have a preview as well.
+   
+Seperate out add review into two steps fetching review info, and adding 
+review.  This would enable adding review info to form so they could
+pver-ride things like tagline etc. before adding review to bbcode
+
+
+
 
 

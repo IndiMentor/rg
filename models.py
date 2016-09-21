@@ -7,7 +7,7 @@ __author__ = 'eljefeloco'
 
 class Review:
     """A Review object encapsulates inportant fields"""
-    def __init__(self,who=None,tagline=None,url=None,when=None,reviewof=None):
+    def __init__(self, who=None, tagline=None, url=None, when=None, reviewof=None):
         self.who = who
         self.tagline = tagline
         self.url = url
@@ -15,32 +15,32 @@ class Review:
         self.reviewof = reviewof
 
     @classmethod
-    def from_data(cls,who,tagline,url,when,reviewof=None):
-        return cls(who,tagline,url,when,reviewof)
+    def from_data(cls, who, tagline, url, when, reviewof=None):
+        return cls(who, tagline, url, when, reviewof)
 
     @classmethod
-    def from_page(cls,page_url):
+    def from_page(cls, page_url):
 
         the_page = requests.get(page_url)
         bs = BeautifulSoup(the_page.content)
 
         # scrape the data
         who = bs.find(itemprop="creator name").get_text(strip=True)
-        tagline = bs.find("h1").get_text(strip=True,separator=u" ")
+        tagline = bs.find("h1").get_text(strip=True, separator=u" ")
         url = page_url
         when = bs.find(itemprop="commentTime")['title']
         reviewof = ""
 
-        return cls(who,tagline,url,when,reviewof)
+        return cls(who, tagline, url, when, reviewof)
 
 
 def main():
 
-    r1 = Review('Brian','Blew my mind','http://indimentor.tk/','Oct-2016')
-    r2 = Review('HipMonster','The Best a Man Can Get','http://indimentor.tk/','Oct-2016')
-    r3 = Review('ForeverOrange','WOW!  Meet my new ATF.','http://indimentor.tk/','Oct-2016')
-    r4 = Review('WTF','The Most beautiful Girl in the World!','http://indimentor.tk/','Oct-2016')
-    r5 = Review('CoolHandLuke','Blew my willy','http://indimentor.tk/','Oct-2016')
+    r1 = Review('Brian', 'Blew my mind', 'http://indimentor.tk/', 'Oct-2016')
+    r2 = Review('HipMonster', 'The Best a Man Can Get', 'http://indimentor.tk/', 'Oct-2016')
+    r3 = Review('ForeverOrange', 'WOW!  Meet my new ATF.', 'http://indimentor.tk/', 'Oct-2016')
+    r4 = Review('WTF', 'The Most beautiful Girl in the World!', 'http://indimentor.tk/', 'Oct-2016')
+    r5 = Review('CoolHandLuke', 'Blew my willy', 'http://indimentor.tk/', 'Oct-2016')
 
     allreviews = []
 
@@ -51,7 +51,7 @@ def main():
     allreviews.append(r5)
 
     for rvw in allreviews:
-        print("{} by {}".format(rvw.tagline,rvw.who))
+        print("{} by {}".format(rvw.tagline, rvw.who))
 
     return
 
