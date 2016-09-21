@@ -26,10 +26,18 @@ TODO:
 * ~~Add Font field both based on values permitted by indi~~
 * indimentor intropost
 * easyengine setup inditools.tk
-* Strip out ?blahblah from urls
-* check if / how urls can be normalized
+* ~~Strip out ?blahblah from urls~~
+* ~~check if / how urls can be normalized~~
+*     ~~<link id="ipsCanonical" rel="canonical"~~ 
+~~href="http://independentgirls.com/indiboard/index
+.php/topic/459542-pp-yani/"/>~~
 * ~~Have theme's incorporate color & font fields~~
 * Intro text for home page
+* ~~Don't show header option~~
+* Add center option.
+* Make session use s 30-day cookie so info retained if they accidentally
+close the browser
+
 
 
 ### Later versions
@@ -45,7 +53,9 @@ could pver-ride things like tagline etc. before adding review to bbcode
 
 
 
-
+ ## New Themes
+ 
+ 
 
 
 

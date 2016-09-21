@@ -1,9 +1,10 @@
 {% extends 'bbcode.html' %}
 {% block thebbcode %}
-    <p>
+    <p> {% if incheader == true %}
         {{ color(vcolor,size(4,center_content(font(vfont,under(reviewheading,headchar))))) }}
         {{ color(vcolor,size(4,center_content(font(vfont,reviewheading)))) -}}
         {{ color(vcolor,size(4,center_content(font(vfont,under(reviewheading,headchar))))) }}
+        {% endif %}
         [center]
         [font={{- bfont -}}]
         {% for review in reviews %}

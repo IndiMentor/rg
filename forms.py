@@ -1,6 +1,6 @@
 """Module for all WTF form definitions"""
 from flask_wtf import Form
-from wtforms.fields import TextField, StringField, SubmitField, SelectField
+from wtforms.fields import TextField, StringField, SubmitField, SelectField, BooleanField
 from wtforms.validators import DataRequired, Regexp, ValidationError, URL
 import requests
 
@@ -102,6 +102,7 @@ class URLForm(Form):
                                               ('#DC143C', 'Crimson'), ('#D2691E', 'Chocolate'),
                                               ('#FF7F50', 'Coral'), ('#A52A2A', 'Brown'),
                                               ('#00FFFF', 'Aqua')])
+    forminchead = BooleanField("Include Header", default=True)
     formregen = SubmitField("Regnerate")
     formreset = SubmitField("Reset")
 

@@ -21,15 +21,17 @@ class Review:
     @classmethod
     def from_page(cls, page_url):
 
+
         the_page = requests.get(page_url)
-        bs = BeautifulSoup(the_page.content)
+        bs = BeautifulSoup(the_page.content,"html.parser")
 
         # scrape the data
         who = bs.find(itemprop="creator name").get_text(strip=True)
         tagline = bs.find("h1").get_text(strip=True, separator=u" ")
-        url = page_url
+        # url = page_url
         when = bs.find(itemprop="commentTime")['title']
         reviewof = ""
+        url = bs.find("link", {'rel':'canonical'}).attrs.get('href', None)
 
         return cls(who, tagline, url, when, reviewof)
 

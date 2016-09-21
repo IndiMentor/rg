@@ -89,7 +89,6 @@ def withurl():
             json_data = pickle.dumps(exist_reviews)
             session['reviews'] = json_data
         elif uform.formregen.data:
-            # Regen was chosen.  Just render w/o creating new review
             return render_template(uform.formtheme.data,
                                    form=uform,
                                    reviews=exist_reviews,
@@ -98,7 +97,9 @@ def withurl():
                                    headchar=uform.headchar.data,
                                    vcolor=uform.formcolor.data,
                                    vfont=uform.formheadfont.data,
-                                   bfont=uform.formbodyfont.data)
+                                   bfont=uform.formbodyfont.data,
+                                   incheader=uform.forminchead.data)
+            # Regen was chosen.  Just render w/o creating new review
         else:
             # addreview was chosen. Validate, create new review & store it
             if uform.validate_on_submit():
@@ -111,7 +112,8 @@ def withurl():
                                        headchar=uform.headchar.data,
                                        vcolor=uform.formcolor.data,
                                        vfont=uform.formheadfont.data,
-                                       bfont=uform.formbodyfont.data)
+                                       bfont=uform.formbodyfont.data,
+                                       incheader=uform.forminchead.data)
     # must have been a GET, show the base form view
     return render_template('onget.html', form=uform)
 
