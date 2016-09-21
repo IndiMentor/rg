@@ -62,6 +62,49 @@ class URLForm(Form):
     rewiewsep = StringField("Review Separator", default=" * ")
     rewiewheading = StringField("Heading", default="Recent Reviews")
     headchar = StringField("Underline Character for Heading", default="-")
+    formheadfont = SelectField("Heading Font", choices=[
+        ('arial,helvetica,sans-serif', 'arial'),
+        ('comic sans ms,cursive', 'comic sans ms'),
+        ('courier new,courier,monospace', 'courier new'),
+        ('georgia,serif', 'georgia'),
+        ('lucida sans unicode,lucida grande,sans-serif',
+         'lucida sans unicode'),
+        ('tahoma,geneva,sans-serif', 'tahoma'),
+        ('times new roman,times,serif', 'times new roman'),
+        ('trebuchet ms,helvetica,sans-serif', 'trebuchet ms'),
+        ('verdana,geneva,sans-serif', 'verdana')])
+    formbodyfont = SelectField("Body Font", choices=[
+        ('arial,helvetica,sans-serif', 'arial'),
+        ('comic sans ms,cursive', 'comic sans ms'),
+        ('courier new,courier,monospace', 'courier new'),
+        ('georgia,serif', 'georgia'),
+        ('lucida sans unicode,lucida grande,sans-serif',
+         'lucida sans unicode'),
+        ('tahoma,geneva,sans-serif', 'tahoma'),
+        ('times new roman,times,serif', 'times new roman'),
+        ('trebuchet ms,helvetica,sans-serif', 'trebuchet ms'),
+        ('verdana,geneva,sans-serif', 'verdana')])
 
+    formcolor = SelectField("Color", choices=[('#FF0000', 'Red'), ('#000000', 'Black'), ('#800080', 'Purple'),
+                                              ('#FFC0CB', 'Pink'), ('#0000FF', 'Blue'),
+                                              ('#FFFF00', 'Yellow'), ('#EE82EE', 'Violet'),
+                                              ('#FFFFFF', 'White'), ('#008080', 'Teal'),
+                                              ('#FFA500', 'Orange'), ('#191970', 'MidnightBlue'),
+                                              ('#FF00FF', 'Magenta'), ('#32CD32', 'LimeGreen'),
+                                              ('#FFFFE0', 'LightYellow'), ('#FFB6C1', 'LightPink'),
+                                              ('#90EE90', 'LightGreen'), ('#ADD8E6', 'LightBlue'),
+                                              ('#7CFC00', 'LawnGreen'), ('#FFFFF0', 'Ivory'),
+                                              ('#FF69B4', 'HotPink'), ('#008000', 'Green'),
+                                              ('#808080', 'Gray'), ('#FFD700', 'Gold'),
+                                              ('#FF00FF', 'Fuchsia'), ('#FF1493', 'DeepPink'),
+                                              ('#8B0000', 'DarkRed'), ('#006400', 'DarkGreen'),
+                                              ('#A9A9A9', 'DarkGray'), ('#00008B', 'DarkBlue'),
+                                              ('#DC143C', 'Crimson'), ('#D2691E', 'Chocolate'),
+                                              ('#FF7F50', 'Coral'), ('#A52A2A', 'Brown'),
+                                              ('#00FFFF', 'Aqua')])
     formregen = SubmitField("Regnerate")
     formreset = SubmitField("Reset")
+
+
+
+

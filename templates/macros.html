@@ -1,5 +1,6 @@
 {% macro center_content(content) %}[center]{{-content-}}[/center]{% endmacro %}
-{% macro url(url,text) %}[url={{url}}]{{text}}[/url]{% endmacro %}
-{%- macro size(content,sz) -%}[size={{ sz }}]{{-content-}}[/size]{% endmacro %}
-{%- macro color(content,col) -%}[color={{ col }}]{{- content -}}[/color]{%- endmacro -%}
+{% macro color(vcolor,content) %}[color={{ vcolor  }}]{{- content -}}[/color]{% endmacro %}
+{% macro font(fontname,content)%}[font={{ fontname }}]{{- content -}}[/font]{% endmacro %}
+{% macro url(url,content) %}[url={{url}}]{{content}}[/url]{% endmacro %}
+{%- macro size(sz,content) -%}[size={{ sz }}]{{-content-}}[/size]{% endmacro %}
 {%- macro under(rh,hc) -%}{%  for count in range(rh|length) -%}{{ hc }}{% endfor %}{%  endmacro %}

@@ -1,17 +1,19 @@
 {%  extends 'bbcode.html' %}
 {% block thebbcode %}
     <p>
-        {{ color(size(center_content(under(reviewheading,headchar)),4),'Red') }}
-        {{ color(size(center_content(reviewheading),4),'Red') -}}
-        {{ color(size(center_content(under(reviewheading,headchar)),4),'Red') }}
+        {{ color(vcolor,size(4,center_content(font(vfont,under(reviewheading,headchar))))) }}
+        {{ color(vcolor,size(4,center_content(font(vfont,reviewheading)))) -}}
+        {{ color(vcolor,size(4,center_content(font(vfont,under(reviewheading,headchar))))) }}
         [center]
+        [font={{ bfont }}]
         {% for review in reviews -%}
-        [color=red]{{ url(review.url,review.tagline ) }}[/color] by [b]{{ review.who }}[/b]
+        [color={{ vcolor }}]{{ url(review.url,review.tagline ) }}[/color] by [b]{{ review.who }}[/b]
         {% if not loop.last %}
            {{- reviewsep -}}
         {% endif %}
 
         {%- endfor %}
+        [/font]
         [/center]
     </p>
 

@@ -95,7 +95,10 @@ def withurl():
                                    reviews=exist_reviews,
                                    reviewheading=uform.rewiewheading.data,
                                    reviewsep=uform.rewiewsep.data,
-                                   headchar=uform.headchar.data)
+                                   headchar=uform.headchar.data,
+                                   vcolor=uform.formcolor.data,
+                                   vfont=uform.formheadfont.data,
+                                   bfont=uform.formbodyfont.data)
         else:
             # addreview was chosen. Validate, create new review & store it
             if uform.validate_on_submit():
@@ -105,7 +108,10 @@ def withurl():
                 return render_template(uform.formtheme.data, form=uform, reviews=exist_reviews,
                                        reviewheading=uform.rewiewheading.data,
                                        reviewsep=uform.rewiewsep.data,
-                                       headchar=uform.headchar.data)
+                                       headchar=uform.headchar.data,
+                                       vcolor=uform.formcolor.data,
+                                       vfont=uform.formheadfont.data,
+                                       bfont=uform.formbodyfont.data)
     # must have been a GET, show the base form view
     return render_template('onget.html', form=uform)
 
