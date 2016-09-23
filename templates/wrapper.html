@@ -2,15 +2,15 @@
 {% block thebbcode %}
     <pre>---- Copy From The Line Below ----</pre>
     <p> {% if incheader == true %}
-        {{ color(vcolor,size(5,center_content(vcenter,font(vfont,under(reviewheading,headchar))))) }}&#10;
-        {{ color(vcolor,size(5,center_content(vcenter,font(vfont,reviewheading)))) -}}&#10;
-        {{ color(vcolor,size(5,center_content(vcenter,font(vfont,under(reviewheading,headchar))))) }}&#10;
+        {{ color(vcolor,size(5,center_content(vcenter,font(vfont,under(reviewheading,headchar))))) }}&#13;
+        {{ color(vcolor,size(5,center_content(vcenter,font(vfont,reviewheading)))) -}}&#13;
+        {{ color(vcolor,size(5,center_content(vcenter,font(vfont,under(reviewheading,headchar))))) }}&#13;
         {% endif %}
         {% if vcenter == true %}[center]{% endif %}
         [font={{ bfont }}]
         [color={{ vcolor }}]
         {% for review in reviews -%}
-        {{ url(review.url,review.tagline ) }} by [b]{{ review.who }}[/b]
+        {{ url(review.url,color(vcolor,review.tagline )) }} by [b]{{ review.who }}[/b]
         {% if not loop.last %}
            {{- reviewsep -}}
         {% endif %}
