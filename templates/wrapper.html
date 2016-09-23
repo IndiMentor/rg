@@ -1,11 +1,12 @@
 {%  extends 'bbcode.html' %}
 {% block thebbcode %}
-    <p> {% if incheader %}
-        {{ color(vcolor,size(4,center_content(font(vfont,under(reviewheading,headchar))))) }}
-        {{ color(vcolor,size(4,center_content(font(vfont,reviewheading)))) -}}
-        {{ color(vcolor,size(4,center_content(font(vfont,under(reviewheading,headchar))))) }}
+    <pre>---- Copy From The Line Below ----</pre>
+    <p> {% if incheader == true %}
+        {{ color(vcolor,size(4,center_content(vcenter,font(vfont,under(reviewheading,headchar))))) }}
+        {{ color(vcolor,size(4,center_content(vcenter,font(vfont,reviewheading)))) -}}
+        {{ color(vcolor,size(4,center_content(vcenter,font(vfont,under(reviewheading,headchar))))) }}
         {% endif %}
-        [center]
+        {% if vcenter == true %}[center]{% endif %}
         [font={{ bfont }}]
         {% for review in reviews -%}
         [color={{ vcolor }}]{{ url(review.url,review.tagline ) }}[/color] by [b]{{ review.who }}[/b]
@@ -15,7 +16,7 @@
 
         {%- endfor %}
         [/font]
-        [/center]
+        {% if vcenter == true  %}[/center]{% endif %}
     </p>
-
+    <pre>---- Copy From The Line Below ----</pre>
 {% endblock thebbcode %}

@@ -98,7 +98,8 @@ def withurl():
                                    vcolor=uform.formcolor.data,
                                    vfont=uform.formheadfont.data,
                                    bfont=uform.formbodyfont.data,
-                                   incheader=uform.forminchead.data)
+                                   incheader=uform.forminchead.data,
+                                   vcenter=uform.formcenter.data)
             # Regen was chosen.  Just render w/o creating new review
         else:
             # addreview was chosen. Validate, create new review & store it
@@ -113,7 +114,8 @@ def withurl():
                                        vcolor=uform.formcolor.data,
                                        vfont=uform.formheadfont.data,
                                        bfont=uform.formbodyfont.data,
-                                       incheader=uform.forminchead.data)
+                                       incheader=uform.forminchead.data,
+                                       vcenter=uform.formcenter.data)
     # must have been a GET, show the base form view
     return render_template('onget.html', form=uform)
 
@@ -138,6 +140,6 @@ def basicnavbar():
     )
 
 nav.init_app(app)
+register_renderer(app, 'custom', InverseRenderer)
 if __name__ == '__main__':
-    register_renderer(app, 'custom', InverseRenderer)
     app.run()

@@ -22,8 +22,20 @@ body {
     margin-left: 5px;
 }
 
-.starter-template {
-    padding: 40px 15px;
+.news-header {
+    color: ivory;
+    padding-top: 40px   ;
+}
+
+.news-date {
+    font-size: 80%;
+    color: darkgray;
+}
+
+article>div {
+    padding-top: 20px;
+
+}
+#col2, #col1 {
     text-align: center;
-    background-color: #292929;
 }

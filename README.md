@@ -20,8 +20,8 @@ TODO:
 * Make video showing usage max 1 min.
 * Description of how to use incorporated into web page
 * Research how to deploy on nginx
-* Uninstall bbcode
-* Fix-up validation so if can't get review info fail url
+* ~~Uninstall bbcode~~
+* ~~Fix-up validation so if can't get review info fail url~~
 * ~~Add Highlight color field~~
 * ~~Add Font field both based on values permitted by indi~~
 * indimentor intropost
@@ -34,14 +34,10 @@ TODO:
 * ~~Have theme's incorporate color & font fields~~
 * Intro text for home page
 * ~~Don't show header option~~
-* Add center option.
-* Make session use s 30-day cookie so info retained if they accidentally
-close the browser
-
+* ~~Add center option.~~
 
 
 ### Later versions
-
 
 * Render bbcode ina seperate template that is written to a string
 insert this string into web page and have converted to html by
@@ -50,12 +46,8 @@ bbcode so have a preview as well.
 adding review.  This would enable adding review info to form so they 
 could pver-ride things like tagline etc. before adding review to bbcode
 * Replace select list for colors on urlform with a color picker
-
-
-
- ## New Themes
- 
- 
-
-
-
+* Replace quick form with handcode bootstrap form
+* Make session use s 30-day cookie so info retained if they accidentally
+close the browser
+* put search for reviews into the app so they don't have to cut 
+switch apps, paste etc

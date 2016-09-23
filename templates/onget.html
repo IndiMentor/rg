@@ -1,8 +1,11 @@
 {% extends 'bbcode.html' %}
 {%  block thebbcode %}
-    <p>Use the form to enter details of your reviews.</p>
-    <p>Cut & paste the URL i.e. http://s.com/thereview into the url field.</p>
-    ----
+    <p>Use the form to the right or below to enter details of your reviews.</p>
+    <p>When you've added them all, choose the formatting options you prefer and hit
+        <strong>Regenerate</strong></p>
+    <p>When you are happy, cut and paste the resulting bbcode into the appropriate place in your ad,
+        signature or profile on <a href="independentgirls.com">Indi</a></p>
+    <p>Watch the following video for a step-by-step walkthrough.</p>
     {% for review in reviews %}
         {{ review.url,review.who,review.tagline,review.when }}
     {% endfor %}

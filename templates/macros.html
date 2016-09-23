@@ -1,4 +1,6 @@
-{% macro center_content(content) %}[center]{{-content-}}[/center]{% endmacro %}
+{% macro center_content(vcenter,content) %}{% if vcenter == true %}[center]{% endif
+        %}{{-content-}}{% if vcenter == true %}[/center]{% endif %}{%
+        endmacro %}
 {% macro color(vcolor,content) %}[color={{ vcolor  }}]{{- content -}}[/color]{% endmacro %}
 {% macro font(fontname,content)%}[font={{ fontname }}]{{- content -}}[/font]{% endmacro %}
 {% macro url(url,content) %}[url={{url}}]{{content}}[/url]{% endmacro %}

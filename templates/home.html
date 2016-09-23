@@ -3,11 +3,63 @@
 {% import "bootstrap/wtf.html" as wtf %}
 
 {% block contained_content %}
-    <div class="col-sm-5">
-        <h1>Home Page</h1>
-    </div>
-    <div class="col-sm-7">
-        <h1>Nothing to see!</h1>
+    <div class="col-sm-6">
+        <h2>Welcome to IndiTools</h2>
+
+        <div class="intro">
+            This site collects together a few basic tools deisgned to make it a little easier to manage
+            your business on <a href="http://independentgirls.com">Indi</a>.  Make technology work for you!
+            One of the goals of this site is to make running your business from your phone a possibility.
+            It's a way off from happening,
+        </div><!-- intro -->
+        <div class="news">
+            <div class="news-header">
+                <h3>
+                    <span class="news-headline">Review Generator Released</span>
+                    <span class="news-date"> - 22 Sep 2016</span>
+                </h3>
+            </div><!-- news-header -->
+            <article>
+                <div class="newspara">
+                    <p>The initial version of the <i>IndiTools</i>
+                    <a href="/review">Review Generator</a> has been released.  This tools allows you to
+                    enter the urls of your reviews on
+                    <a href="http://independentgirls.com">Independent Girls</a> and create a nicely
+                    formatted review excerpt block that you can cut and paste into your advert, signature or
+                    profile.</p>
+                </div>
+                <div class="newspara">
+                    <p>Review Blocks are a great way to communicate those things you aren't strictly allowed
+                    to mention in your ads, but which are allowed in reviews.  There a great marketing tool,
+                    especially for newbie <span>IndiGirls</span> just starting out, who need to work
+                    particularly hard at establishing your reputation.</p>
+                </div>
+                <div class="newspara">
+                    <p>But, reviews work equally well for Legends, there's nothing like
+                        pointing to your latest reviews to give everyone a reminder of how you got to be as
+                        Legendary as you are. A great little boost to your business during off-season never
+                        hurt anyone!</p>
+                </div>
+            </article>
+            <div class="news-header">
+                <h3>
+                  <span class="news-headline"><a href="https://inditools.tk">IndiTools</a> Launched</span>
+                  <span class="news-date"> - 20 Sep 2016</span>
+                </h3>
+            </div><!-- news-header -->
+            <article>
+                <div class="newspara">
+                    <p>IndiTools has been launched.  The goal of this website is to collect
+                    together a series of tools that simplify the process of running their business on
+                    <a href="http://independentgirls.com">Independent Girls</a></p>
+                </div>
+                <div class="newspara">
+                    <p>Stay tuned for new tool releases over the coming days!</p>
+                </div>
+            </article>
+        </div><!-- news -->
+    </div><!-- col-sm-6 -->
+    <div class="col-sm-6">
         {% block thebbcode %}
         {% endblock thebbcode %}
     </div>
