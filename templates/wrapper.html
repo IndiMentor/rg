@@ -7,15 +7,13 @@
         {{ color(vcolor,size(5,center_content(vcenter,font(vfont,under(reviewheading,headchar))))) }}&#13;
         {% endif %}
         {% if vcenter == true %}[center]{% endif %}
-        [font={{ bfont }}]
+        [font={{- bfont -}}]
         [color={{ vcolor }}]
         {% for review in reviews -%}
         {{ url(review.url,color(vcolor,review.tagline )) }} by [b]{{ review.who }}[/b]
-        {% if not loop.last %}
-           {{- reviewsep -}}
-        {% endif %}
-        [/color]
+        {% if not loop.last %}{{- reviewsep -}}{% endif %}
         {%- endfor %}
+        [/color]
         [/font]
         {% if vcenter == true  %}[/center]{% endif %}
     </p>
