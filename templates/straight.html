@@ -2,12 +2,9 @@
 {% block thebbcode %}
     <pre>---- Copy From The Line Below ----</pre>
     <p> {% if incheader == true %}
-        {{ color(vcolor,size(5,center_content(vcenter,font(vfont,under(reviewheading,headchar))))) }}
-        {% if vcenter == false %}[center][/center]{% endif %}
-        {{ color(vcolor,size(5,center_content(vcenter,font(vfont,reviewheading)))) -}}
-        {% if vcenter == false %}[center][/center]{% endif %}
-        {{ color(vcolor,size(5,center_content(vcenter,font(vfont,under(reviewheading,headchar))))) }}
-        {% if vcenter == false %}[center][/center]{% endif %}
+        {{ color(vcolor,size(5,center_content(vcenter,font(vfont,under(reviewheading,headchar))))) }}&#10;
+        {{ color(vcolor,size(5,center_content(vcenter,font(vfont,reviewheading)))) -}}&#10;
+        {{ color(vcolor,size(5,center_content(vcenter,font(vfont,under(reviewheading,headchar))))) }}&#10;
         {% endif %}
         {% if vcenter == true %}[center]{% endif %}
         [font={{- bfont -}}]
