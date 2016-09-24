@@ -56,7 +56,7 @@ class ReviewForm(Form):
 class URLForm(Form):
     ReviewURL = StringField(
         "Review URL",
-        default="http://independentgirls.com/indiboard/index.php/topic/502060-1pretty-lady/",
+        #default="http://independentgirls.com/indiboard/index.php/topic/502060-1pretty-lady/",
         validators=[
             DataRequired("You must enter the review URL"),
             URL("Invalid URL Format"),
