@@ -12,6 +12,7 @@ from flask_nav import Nav
 from flask_nav.elements import Navbar, View
 from flask_nav import register_renderer
 from inverse_render import InverseRenderer  # or wherever you put all of it
+import logging
 import pickle
 
 nav = Nav()
@@ -70,25 +71,33 @@ allreviews = [
 
 @app.route("/review", methods=('POST', 'GET'))
 def withurl():
-
+    logging.info("Hit /review url")
     if 'reviews' not in session:
+        logging.info("Checked Session has no reviews in it")
         exist_reviews = []
         json_data = pickle.dumps(exist_reviews)
         session['reviews'] = json_data
+        logging.info("created & stored empty seviews %s",json_data)
     else:
+        logging.info("Checked session has reviews cookie load it")
         json_data = session['reviews']
         exist_reviews = pickle.loads(json_data)
+        logging.debug("Session loaded %s",exist_reviews)
 
     uform = URLForm()
     # Check which request method was used
     if request.method == "POST":
+        logging.info("Was method==POST")
         # Now check which buuton was pressed
         if uform.formreset.data:
+            logging.info("Reset pressed")
             # reset pressed.  Wipeout data and cookie
             exist_reviews = []
             json_data = pickle.dumps(exist_reviews)
             session['reviews'] = json_data
+            logging.debug("empty session reviews = " + str(json_data))
         elif uform.formregen.data:
+            logging.info("Regen was pressed.")
             return render_template(uform.formtheme.data,
                                    form=uform,
                                    reviews=exist_reviews,
@@ -102,10 +111,13 @@ def withurl():
                                    vcenter=uform.formcenter.data)
             # Regen was chosen.  Just render w/o creating new review
         else:
+            logging.info("Add review was pressed.")
             # addreview was chosen. Validate, create new review & store it
             if uform.validate_on_submit():
+                logging.debug("url:%s ", uform.ReviewURL.data)
                 new_rvw = Review.from_page(uform.ReviewURL.data)
                 exist_reviews.append(new_rvw)
+                logging.debug("Resulting review %s",exist_reviews)
                 session['reviews'] = pickle.dumps(exist_reviews)
                 return render_template(uform.formtheme.data, form=uform, reviews=exist_reviews,
                                        reviewheading=uform.rewiewheading.data,
@@ -117,21 +129,25 @@ def withurl():
                                        incheader=uform.forminchead.data,
                                        vcenter=uform.formcenter.data)
     # must have been a GET, show the base form view
+    logging.info("Was method==GET")
     return render_template('onget.html', form=uform)
 
 
 @app.route("/price")
 def price():
+    logging.info("rendering price page")
     return render_template("price.html")
 
 
 @app.route("/")
 def index():
+    logging.info("Rendering home")
     return render_template("home.html")
 
 
 @nav.navigation()
 def basicnavbar():
+    logging.info("Initialising navbar")
     return Navbar(
         'Indi Tools',
         View('Home', 'index'),
@@ -142,4 +158,12 @@ def basicnavbar():
 nav.init_app(app)
 register_renderer(app, 'custom', InverseRenderer)
 if __name__ == '__main__':
+    logging.basicConfig(
+        format='%(asctime)s %(message)s',
+        datefmt='%m/%d/%Y %I:%M:%S %p',
+        level=logging.DEBUG,
+        filename="./rg.log"
+    )
+    logging.info("*" * 80)
+    logging.info("Starting uwsgi app server")
     app.run()

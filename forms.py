@@ -45,7 +45,10 @@ class ReviewForm(Form):
     formreviewof = StringField("Review Of",
                                validators=[Regexp("^[\w ]*", message="Words only please")])
     formtheme = SelectField("Theme",
-                            choices=[('wrapper.html', 'Wrapper'), ('straight.html', 'Straight')],
+                            choices=[
+                                ('wrapped.html', 'Wrapper'),
+                                ('inline.html', 'Straight'),
+                                ('centered_column.html','Centered Column')],
                             validators=[DataRequired("Please enter a theme")])
     rewiewsep = StringField("Review Separator", default=" * ")
     rewiewheading = StringField("Heading", default="Recent Reviews")
@@ -63,7 +66,10 @@ class URLForm(Form):
             url_exists])
     formsubmit = SubmitField("Add Review")
     formtheme = SelectField("Theme",
-                            choices=[('wrapper.html', 'Wrapper'), ('straight.html', 'Straight')],
+                            choices=[
+                                ('wrapped.html', 'Wrapper'),
+                                ('inline.html', 'Straight'),
+                                ('centered_column.html','Centered Column')],
                             validators=[DataRequired("Pleas enter a theme")])
     rewiewsep = StringField("Review Separator", default=" * ")
     rewiewheading = StringField("Heading", default="Recent Reviews")

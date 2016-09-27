@@ -19,20 +19,20 @@ TODO:
 
 * Make video showing usage max 1 min.
 * Description of how to use incorporated into web page
-* Research how to deploy on nginx
+* ~~Research how to deploy on nginx~~
 * ~~Uninstall bbcode~~
 * ~~Fix-up validation so if can't get review info fail url~~
 * ~~Add Highlight color field~~
 * ~~Add Font field both based on values permitted by indi~~
 * indimentor intropost
-* easyengine setup inditools.tk
+* ~~easyengine setup inditools.tk~~
 * ~~Strip out ?blahblah from urls~~
 * ~~check if / how urls can be normalized~~
 *     ~~<link id="ipsCanonical" rel="canonical"~~ 
 ~~href="http://independentgirls.com/indiboard/index
 .php/topic/459542-pp-yani/"/>~~
 * ~~Have theme's incorporate color & font fields~~
-* Intro text for home page
+* ~~Intro text for home page~~
 * ~~Don't show header option~~
 * ~~Add center option.~~
 
@@ -51,3 +51,9 @@ could pver-ride things like tagline etc. before adding review to bbcode
 close the browser
 * put search for reviews into the app so they don't have to cut 
 switch apps, paste etc
+
+### Theme's
+
+1. Wrapper for signatures
+2. Inline for use in ads
+3. Centered Column

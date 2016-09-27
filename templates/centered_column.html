@@ -1,0 +1,22 @@
+{%  extends 'bbcode.html' %}
+{% block thebbcode %}
+    <pre>---- Copy From The Line Below ----</pre>
+    <p>
+        {{ color(vcolor,size(5,center_content(True,font(vfont,under(reviewheading,headchar))))) }}         {{ color(vcolor,size(5,center_content(True,font(vfont,reviewheading)))) -}}       {{ color(vcolor,size(5,center_content(True,font(vfont,under(reviewheading,headchar))))) }}
+
+        [center]
+        [font={{- bfont -}}]
+        [color={{ vcolor }}]
+        {% for review in reviews -%}
+            {{- reviewsep -}}
+            {{ url(review.url,color(vcolor,review.tagline )) }} by [b]{{ review.who }}[/b]
+            {{- reviewsep -}}&#13;
+        {%- endfor %}
+        [/color]
+        [/font]
+        [/center]
+        &#13;
+
+    </p>
+    <pre>---- Copy From The Line Below ----</pre>
+{% endblock thebbcode %}
